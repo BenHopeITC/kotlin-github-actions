@@ -38,4 +38,5 @@ nb-configuration.xml
 .terraform
 
 # private vars for requests
+
 *.private.env.json

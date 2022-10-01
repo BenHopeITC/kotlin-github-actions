@@ -30,3 +30,9 @@ tasks.withType<KotlinCompile> {
 application {
     mainClass.set("MainKt")
 }
+
+tasks.test {
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}

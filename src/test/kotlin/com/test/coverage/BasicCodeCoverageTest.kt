@@ -10,4 +10,10 @@ class BasicCodeCoverageTest {
         val m = BasicCodeCoverage()
         m.greet(m.world()) shouldBe "Hello World"
     }
+
+    @Test
+    fun `calls HelloWorld2()`() {
+        val m = BasicCodeCoverage()
+        m.HelloWorld2() shouldBe "Hello World!"
+    }
 }

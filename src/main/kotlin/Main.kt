@@ -8,4 +8,5 @@ fun main(args: Array<String>) {
     println("Program arguments: ${args.joinToString()}")
 
     println(BasicCodeCoverage().HelloWorld())
+    println(BasicCodeCoverage().HelloWorld2())
 }

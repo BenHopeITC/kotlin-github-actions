@@ -6,8 +6,9 @@ plugins {
     kotlin("jvm") version "1.7.10"
     application
 
-    id("org.jetbrains.kotlinx.kover") version "0.6.1"
+//    id("org.jetbrains.kotlinx.kover") version "0.6.1"
 
+    jacoco
     id("org.sonarqube") version "3.4.0.2513"
 }
 
@@ -23,9 +24,23 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 }
 
-kover {
-    isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
-    engine.set(kotlinx.kover.api.DefaultIntellijEngine)
+//kover {
+//    isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
+//    engine.set(kotlinx.kover.api.DefaultIntellijEngine)
+//}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        enabled
+
+        xml.required.set(true)
+
+        csv.required.set(false)
+
+        html.required.set(false)
+//        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
 }
 
 application {
@@ -34,6 +49,7 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.withType<KotlinCompile> {

@@ -11,5 +11,6 @@ jobs:
   Job-Triggered-By-Another-Workflow:
     environment: dev
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."

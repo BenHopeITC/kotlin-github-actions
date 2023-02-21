@@ -1,0 +1,15 @@
+name: Triggered by another workflow
+run-name: Triggered by another workflow RT name
+
+on:
+  workflow_run:
+    workflows: [GitHub Actions Demo]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  Explore-GitHub-Actions:
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."

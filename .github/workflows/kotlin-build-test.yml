@@ -1,6 +1,9 @@
 name: Kotlin Build and Test
 run-name: build and test kotlin 🚀
-on: [push]
+
+on:
+  workflow_dispatch:
+
 jobs:
   kotlin-build-test:
     runs-on: ubuntu-latest

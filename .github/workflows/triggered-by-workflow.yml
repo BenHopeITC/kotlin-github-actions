@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Job-Triggered-By-${{ github.event_name }}:
+  Job-Triggered-By-Another-Workflow:
     environment: dev
     runs-on: ubuntu-latest
     steps:

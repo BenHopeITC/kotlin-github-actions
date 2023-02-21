@@ -4,6 +4,9 @@ run-name: Testing commit message, ${{ github.event.head_commit.message }}
 on:
   workflow_call:
     inputs:
+      ENV:
+        required: true
+        type: string
       TEST_INPUT:
         required: true
         type: string
@@ -13,11 +16,12 @@ on:
 
 jobs:
   Explore-GitHub-Actions:
-    environment: dev
+    environment: ${{ inputs.ENV }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Test Input, ${{ inputs.TEST_INPUT }}"
       - run: echo "Test Secret, ${{ secrets.TEST_SECRET }}"
+      - run: echo "Test Variables, ${{ vars.TEST_VAR }}"
 
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"

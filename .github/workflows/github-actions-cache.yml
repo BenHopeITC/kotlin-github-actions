@@ -16,20 +16,20 @@ jobs:
       - name: Create directories
         run: mkdir ./roo && mkdir ./roo/bar && mkdir ./roo/bar/foo
 
-      - name:
+      - name: Create files
         run: echo "File Content" > ./roo/bar/foo/file1.txt
           && echo "File Content" > ./roo/bar/foo/file2.txt
           && echo "File Content" > ./roo/bar/foo/file3.txt
 
-      - name: Log Serverless Framework artifacts
+      - name: Log cache contents
         run: ls ./roo/bar/foo
 
-      - name: Cache my artifacts
+      - name: Save Cache
         id: cache-roo
         uses: actions/cache@v3
         with:
           key: my-roo
-          path: ./roo/bar/foo
+          path: ./roo
 
   use-cache-1:
     needs: [create-cache]
@@ -39,12 +39,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      #      - name: Restore cache
-      #        id: cache-myartifacts
-      #        uses: actions/cache@v3
-      #        with:
-      #          key: my-build-artifacts
-      #          path: build
+      - name: Restore cache
+        id: cache-roo
+        uses: actions/cache@v3
+        with:
+          key: my-roo
+          path: ./roo
 
       - name: Log Serverless Framework artifacts
         if: steps.cache-roo.outputs.cache-hit != 'true'

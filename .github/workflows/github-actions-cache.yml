@@ -34,7 +34,7 @@ jobs:
   use-cache-1:
     needs: [create-cache]
     environment: dev
-    concurrency: create-cache
+    concurrency: use-cache-2
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
   use-cache-2:
     needs: [create-cache]
     environment: dev
-    concurrency: create-cache
+    concurrency: use-cache-2
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -70,7 +70,7 @@ jobs:
         run: ls ./roo/bar/foo
 
   remove-cache:
-    needs: [use-cache-1]
+    needs: [use-cache-1,use-cache-2]
     concurrency: create-cache
     runs-on: ubuntu-latest
     env:

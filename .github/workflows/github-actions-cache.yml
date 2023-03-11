@@ -1,0 +1,52 @@
+name: GitHub Actions Demo 23
+run-name: Testing commit message, ${{ github.event.head_commit.message }}
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  create-cache:
+    concurrency: create-cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create directories
+        run: mkdir ./roo && mkdir ./roo/bar && mkdir ./roo/bar/foo
+
+      - name:
+        run: echo "File Content" > ./roo/bar/foo/file1.txt
+          && echo "File Content" > ./roo/bar/foo/file2.txt
+          && echo "File Content" > ./roo/bar/foo/file3.txt
+
+      - name: Log Serverless Framework artifacts
+        run: ls ./roo/bar/foo
+
+      - name: Cache my artifacts
+        id: cache-roo
+        uses: actions/cache@v3
+        with:
+          key: my-roo
+          path: ./roo/bar/foo
+
+  use-cache-1:
+    needs: [create-cache]
+    environment: dev
+    concurrency: create-cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      #      - name: Restore cache
+      #        id: cache-myartifacts
+      #        uses: actions/cache@v3
+      #        with:
+      #          key: my-build-artifacts
+      #          path: build
+
+      - name: Log Serverless Framework artifacts
+        if: steps.cache-roo.outputs.cache-hit != 'true'
+        run: ls ./roo/bar/foo

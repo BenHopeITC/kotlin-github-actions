@@ -48,7 +48,7 @@ jobs:
 
       - name: Log cache contents
 #        if: steps.cache-roo.outputs.cache-hit != 'true'
-        run: ls .
+        run: ls ./roo/bar/foo
 
   remove-cache:
     needs: [use-cache-1]

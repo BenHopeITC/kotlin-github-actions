@@ -25,10 +25,10 @@ jobs:
         run: ls ./roo/bar/foo
 
       - name: Save Cache
-        id: cache-roo-${{ github.run_id }}
+        id: cache-roo
         uses: actions/cache@v3
         with:
-          key: my-roo-${{ github.run_id }}
+          key: my-roo
           path: ./roo
 
   use-cache-1:
@@ -40,14 +40,14 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Restore cache
-        id: cache-roo-${{ github.run_id }}
+        id: cache-roo
         uses: actions/cache@v3
         with:
-          key: my-roo-${{ github.run_id }}
+          key: my-roo
           path: .
 
       - name: Log cache contents
-        if: steps.cache-roo-${{ github.run_id }}.outputs.cache-hit != 'true'
+        if: steps.cache-roo.outputs.cache-hit != 'true'
         run: ls .
 
   remove-cache:
@@ -59,4 +59,4 @@ jobs:
         run:  gh extension install actions/gh-actions-cache
 
       - name: Delete cache
-        run: gh actions-cache delete my-roo-${{ github.run_id }}
+        run: gh actions-cache delete my-roo

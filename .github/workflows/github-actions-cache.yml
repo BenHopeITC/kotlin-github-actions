@@ -54,6 +54,8 @@ jobs:
     needs: [use-cache-1]
     concurrency: create-cache
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Install gh-actions-cache extension
         run:  gh extension install actions/gh-actions-cache

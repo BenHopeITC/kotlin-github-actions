@@ -48,7 +48,7 @@ jobs:
 
       - name: Log Serverless Framework artifacts
         if: steps.cache-roo.outputs.cache-hit != 'true'
-        run: ls ./roo/bar/foo
+        run: ls .
 
   remove-cache:
     needs: [use-cache-1]

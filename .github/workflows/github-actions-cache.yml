@@ -25,10 +25,10 @@ jobs:
         run: ls ./roo/bar/foo
 
       - name: Save Cache
-        id: cache-roo
+        id: cache-roo-${{github.run_number}}
         uses: actions/cache@v3
         with:
-          key: my-roo
+          key: my-roo-${{github.run_number}}
           path: ./roo
 
   use-cache-1:
@@ -40,14 +40,14 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Restore cache
-        id: cache-roo
+        id: cache-roo-${{github.run_number}}
         uses: actions/cache@v3
         with:
-          key: my-roo
+          key: my-roo-${{github.run_number}}
           path: .
 
-      - name: Log Serverless Framework artifacts
-        if: steps.cache-roo.outputs.cache-hit != 'true'
+      - name: Log cache contents
+        if: steps.cache-roo-${{github.run_number}}.outputs.cache-hit != 'true'
         run: ls .
 
   remove-cache:
@@ -55,5 +55,8 @@ jobs:
     concurrency: create-cache
     runs-on: ubuntu-latest
     steps:
+      - name: Install gh-actions-cache extension
+        run:  gh extension install actions/gh-actions-cache
+
       - name: Delete cache
-        run: gh actions-cache delete my-roo
+        run: gh actions-cache delete my-roo-${{github.run_number}}

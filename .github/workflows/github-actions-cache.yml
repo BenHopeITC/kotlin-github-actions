@@ -63,4 +63,4 @@ jobs:
         run:  gh extension install actions/gh-actions-cache
 
       - name: Delete cache
-        run: gh actions-cache delete my-roo
+        run: gh actions-cache delete my-roo --confirm

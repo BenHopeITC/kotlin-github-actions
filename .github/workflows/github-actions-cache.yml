@@ -50,6 +50,25 @@ jobs:
 #        if: steps.cache-roo.outputs.cache-hit != 'true'
         run: ls ./roo/bar/foo
 
+  use-cache-2:
+    needs: [create-cache]
+    environment: dev
+    concurrency: create-cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Restore cache
+        id: cache-roo
+        uses: actions/cache@v3
+        with:
+          key: my-roo
+          path: ./roo/bar/foo
+
+      - name: Log cache contents
+        #        if: steps.cache-roo.outputs.cache-hit != 'true'
+        run: ls ./roo/bar/foo
+
   remove-cache:
     needs: [use-cache-1]
     concurrency: create-cache

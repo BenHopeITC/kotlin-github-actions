@@ -34,7 +34,7 @@ jobs:
   use-cache-1:
     needs: [create-cache]
     environment: dev
-    concurrency: use-cache-2
+    concurrency: use-cache-1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

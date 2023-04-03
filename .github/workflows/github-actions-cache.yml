@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - run: echo "Triggered by commit [${{ vars.GITHUB_SHA }}]"
+
       - name: Create directories
         run: mkdir ./roo && mkdir ./roo/bar && mkdir ./roo/bar/foo
 

@@ -3,7 +3,7 @@ run-name: Triggered by another workflow RT name
 
 on:
   workflow_run:
-    workflows: [GitHub Actions Demo]
+    workflows: [GitHub Actions Cache]
     types: [completed]
   workflow_dispatch:
 
@@ -14,3 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Triggered by commit [${{ vars.GITHUB_SHA }}]"
+      - run: echo "Triggered by commit [${{ GITHUB_SHA }}]"

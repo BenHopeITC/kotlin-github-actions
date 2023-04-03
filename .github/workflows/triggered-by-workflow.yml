@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "Triggered by commit [${{ vars.GITHUB_SHA }}]"
+      - run: echo "Triggered by commit [${{ github.sha }}]"

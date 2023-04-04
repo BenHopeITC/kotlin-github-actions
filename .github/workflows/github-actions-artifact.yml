@@ -27,17 +27,17 @@ jobs:
           name: commit_sha
           path: foo/
 
-  use-artifact:
-    concurrency: save-artifact
-    needs: save-artifact
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: commit_sha
-
-      - run: echo "commit_sha=$(cat commit_sha)" >> $GITHUB_ENV
-
-      - run: echo "Environment Variable `Commit SHA` populated using artifact, value ${{ env.commit_sha }}"
+#  use-artifact:
+#    concurrency: save-artifact
+#    needs: save-artifact
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: commit_sha
+#
+#      - run: echo "commit_sha=$(cat commit_sha)" >> $GITHUB_ENV
+#
+#      - run: echo "Environment Variable `Commit SHA` populated using artifact, value ${{ env.commit_sha }}"

@@ -15,3 +15,11 @@ jobs:
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "Triggered by commit [${{ github.sha }}]"
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: commit_sha
+
+      - run: echo "commit_sha=$(cat commit_sha)" >> $GITHUB_ENV
+
+      - run: echo "Environment Variable `Commit SHA` populated using artifact, value ${{ env.commit_sha }}"

@@ -38,15 +38,6 @@ jobs:
         with:
           name: commit_sha
 
-#      - name: Read `Commit SHA` artifact
-#        uses: actions/github-script@v6
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          script: |
-#            let fs = require('fs');
-#            let commit_sha = fs.readFileSync('./commit_sha');
-#            echo `commit_sha=${commit_sha}` >> $GITHUB_ENV
-
-      - run: echo "commit_sha=123" >> $GITHUB_ENV
+      - run: echo "commit_sha=$(cat commit_sha)" >> $GITHUB_ENV
 
       - run: echo "Environment Variable `Commit SHA` populated using artifact, value ${{ env.commit_sha }}"

@@ -16,10 +16,7 @@ jobs:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "Triggered by commit [${{ github.sha }}]"
 
-      - run: echo "event ${{ github.event.workflow_run.event }}"
-      - run: echo "head_commit.id ${{ github.event.workflow_run.head_commit.id }}"
-      - run: echo "head_sha ${{ github.event.workflow_run.head_sha }}"
-      - run: echo "id ${{ github.event.workflow_run.id }}"
+      - run: echo "run_number ${{ github.event.workflow_run.run_number }}"
 
       - uses: actions/download-artifact@v3
         with:

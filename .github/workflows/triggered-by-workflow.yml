@@ -21,6 +21,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: commit_sha
+          path: https://github.com/BenHopeITC/kotlin-github-actions/suites/12019110970/artifacts/631445419
 
       - run: echo "commit_sha=$(cat commit_sha)" >> $GITHUB_ENV
 

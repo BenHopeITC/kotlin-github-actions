@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      buildNumber:
+        description: 'Build Number'
+        required: true
+        default: 'Enter build number to deploy'
 
 jobs:
   save-artifact:
@@ -14,6 +19,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: echo "Triggered by commit [${{ github.sha }}]"
+
+      - run: echo "Given build number '${{ github.event.inputs.buildNumber }}' as input"
 
       - name: Save `Commit SHA` as artifact
         env:

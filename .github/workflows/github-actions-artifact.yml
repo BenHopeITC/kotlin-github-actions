@@ -1,0 +1,69 @@
+name: GitHub Actions Artifact
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  save-artifact:
+    concurrency: save-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: echo "Triggered by commit [${{ github.sha }}]"
+
+      - name: Save `Commit SHA` as artifact
+        env:
+          GH_SHA: ${{ github.sha }}
+        run: |
+          mkdir -p ./foo
+          echo $GH_SHA > ./foo/commit_sha
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: commit_sha
+          path: foo/
+
+  use-artifact:
+    concurrency: save-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download `Commit SHA` artifact
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "commit_sha"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/commit_sha.zip`, Buffer.from(download.data));
+
+      - name: Unzip `Commit SHA` artifact
+        run: unzip commit_sha.zip
+
+      - name: Read `Commit SHA` artifact
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            let fs = require('fs');
+            let commit_sha = fs.readFileSync('./commit_sha');
+            echo `commit_sha=${commit_sha}` >> $GITHUB_ENV
+
+      - run: echo "Environment Variable `Commit SHA` populated using artifact, value:: ${{ env.commit_sha }}"

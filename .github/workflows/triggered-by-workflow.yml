@@ -3,7 +3,7 @@ run-name: Triggered by another workflow RT name
 
 on:
   workflow_run:
-    workflows: [GitHub Actions Cache]
+    workflows: [GitHub Actions Artifact]
     types: [completed]
   workflow_dispatch:
 

@@ -29,6 +29,7 @@ jobs:
 
   use-artifact:
     concurrency: save-artifact
+    needs: save-artifact
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

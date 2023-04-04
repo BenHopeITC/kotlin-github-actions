@@ -37,7 +37,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: commit_sha
-          path: foo/
 
       - name: Read `Commit SHA` artifact
         uses: actions/github-script@v6

@@ -23,6 +23,16 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 }
 
+val installLocalGitHook = task(name = "installLocalGitHook", type = Copy::class) {
+    from(File(rootProject.rootDir, "scripts/pre-commit"))
+    into(File(rootProject.rootDir, ".git/hooks"))
+    fileMode = 775
+}
+
+tasks.build {
+    dependsOn(installLocalGitHook)
+}
+
 //kover {
 //    isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
 //    engine.set(kotlinx.kover.api.DefaultIntellijEngine)

@@ -1,15 +1,25 @@
 #!/bin/sh
 
-echo "*****BH Running spotlessApply ******"
+# Part 1 - Assign all staged files to a variable:
+# This variable will contain the files, which the developer is about to commit.
+# This is needed as all files with changes might not be staged.
+stagedFiles=$(git diff --staged --name-only)
 
-#git stash -q --keep-index
-
+# Part 2 - Apply the formatting:
+# This is the part where files might be altered during the formatting.
+# You could also run other plugin in addition to the formatting.
+echo "Running spotlessApply. Formatting code..."
 ./gradlew spotlessApply
 
+# Part 3 - Re-add staged files:
+# All files that were identified in Part 1 are staged with git add.
+# A test is needed to check if the file exists, as a staged file might have been deleted.
+for file in $stagedFiles; do
+  if test -f "$file"; then
+    git add $file
+  fi
+done
+
 status=$?
-
-#git stash pop -q
-
-echo "*****BH Done with spotlessApply ******"
 
 exit $status

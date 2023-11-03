@@ -4,10 +4,6 @@ class BasicCodeCoverage() {
     fun helloWorld() = "Hello ${world()}!"
 
     fun helloWorld2(): String {
-
-
-
-
         return "Hello ${world()}!"
     }
 

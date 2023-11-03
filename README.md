@@ -1,5 +1,6 @@
 # Gradle Git Commit Hooks
 https://dev.to/akdevcraft/git-pre-hook-pre-commit-with-gradle-task-134m
+https://medium.com/@mmessell/apply-spotless-formatting-with-git-pre-commit-hook-1c484ea68c34
 
 1. See example scripts in .git folder
 2. Create script in scripts folder

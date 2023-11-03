@@ -5,13 +5,12 @@
 # This is needed as all files with changes might not be staged.
 stagedFiles=$(git diff --staged --name-only)
 
-# Part 2 - Apply the formatting (plus store failure status):
+# Part 2 - Apply the formatting:
 # This is the part where files might be altered during the formatting.
 # You could also run other plugin in addition to the formatting.
 echo "Running spotlessApply. Formatting code..."
 ./gradlew spotlessApply
-
-status=$?
+status=$? # store status from spotlessApply
 
 # Part 3 - Re-add staged files:
 # All files that were identified in Part 1 are staged with git add.

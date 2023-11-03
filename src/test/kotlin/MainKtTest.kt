@@ -7,4 +7,9 @@ internal class MainKtTest {
     fun `my first test`() {
         1 shouldBe 1
     }
+
+    @Test
+    fun `my first test 2`() {
+        2 shouldBe 1
+    }
 }

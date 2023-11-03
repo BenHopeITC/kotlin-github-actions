@@ -5,6 +5,9 @@ class BasicCodeCoverage() {
 
     fun helloWorld2(): String {
 
+
+
+
         return "Hello ${world()}!"
     }
 

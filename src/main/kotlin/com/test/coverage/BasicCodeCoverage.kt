@@ -1,7 +1,7 @@
 package com.test.coverage
 
 class BasicCodeCoverage() {
-    fun helloWorld() = "Hello ${world()}!"
+    fun HelloWorld() = "Hello ${world()}!"
 
     fun helloWorld2(): String {
         return "Hello ${world()}!"

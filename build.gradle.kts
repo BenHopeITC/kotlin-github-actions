@@ -9,6 +9,8 @@ plugins {
 //    id("org.jetbrains.kotlinx.kover") version "0.6.1"
     jacoco
     id("org.sonarqube") version "3.4.0.2513"
+
+    id("com.diffplug.spotless") version "6.22.0"
 }
 
 group = "org.example"
@@ -23,20 +25,36 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 }
 
-val installLocalGitHook = task(name = "installLocalGitHook", type = Copy::class) {
-    from(File(rootProject.rootDir, "scripts/pre-commit"))
-    into(File(rootProject.rootDir, ".git/hooks"))
-    fileMode = 0b111101101
-}
+val installLocalGitHook =
+    task(name = "installLocalGitHook", type = Copy::class) {
+        from(File(rootProject.rootDir, "scripts/pre-commit"))
+        into(File(rootProject.rootDir, ".git/hooks"))
+        fileMode = 0b111101101
+    }
 
 tasks.build {
     dependsOn(installLocalGitHook)
 }
 
-//kover {
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+        // by default the target is every '.kt' and '.kts` file in the java sourcesets
+        ktfmt() // has its own section below
+        ktlint() // has its own section below
+//        diktat()   // has its own section below
+//        prettier() // has its own section below
+//        licenseHeader "/* (C)$YEAR */" // or licenseHeaderFile
+    }
+    kotlinGradle {
+//        target "*.gradle.kts" // default target for kotlinGradle
+        ktlint() // or ktfmt() or prettier()
+    }
+}
+
+// kover {
 //    isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
 //    engine.set(kotlinx.kover.api.DefaultIntellijEngine)
-//}
+// }
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)

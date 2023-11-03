@@ -1,9 +1,9 @@
 package com.test.coverage
 
 class BasicCodeCoverage() {
-    fun HelloWorld() = "Hello ${world()}!"
+    fun helloWorld() = "Hello ${world()}!"
 
-    fun HelloWorld2() : String {
+    fun helloWorld2(): String {
         val foo = "Testing unused"
 
         return "Hello ${world()}!"

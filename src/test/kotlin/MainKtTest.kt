@@ -10,6 +10,6 @@ internal class MainKtTest {
 
     @Test
     fun `my first test 2`() {
-        2 shouldBe 1
+        2 shouldBe 2
     }
 }

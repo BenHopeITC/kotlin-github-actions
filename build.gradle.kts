@@ -26,7 +26,7 @@ dependencies {
 val installLocalGitHook = task(name = "installLocalGitHook", type = Copy::class) {
     from(File(rootProject.rootDir, "scripts/pre-commit"))
     into(File(rootProject.rootDir, ".git/hooks"))
-    fileMode = 775
+    fileMode = 0b111101101
 }
 
 tasks.build {

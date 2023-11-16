@@ -1,7 +1,7 @@
 package com.test.coverage
 
 class AdvancedCodeCoverage() {
-    fun helloWorld() = "Hello 2 advanced ${world()}!"
+    fun HelloWorld() = "Hello 2 advanced ${world()}!"
 
     fun helloWorld2(): String {
         return "Hello advanced ${world()}!"

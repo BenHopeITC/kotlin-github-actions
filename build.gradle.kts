@@ -75,7 +75,20 @@ application {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    val excludeSlowTests = System.getProperty("excludeSlowTests")?.isNotEmpty() ?: false
+
+    val excludeList = mutableSetOf<String>()
+
+    if (excludeSlowTests) excludeList.add("slow")
+
+    if (excludeList.isNotEmpty()) {
+        useJUnitPlatform {
+            excludeTags = excludeList
+        }
+    } else {
+        useJUnitPlatform()
+    }
+
     finalizedBy(tasks.jacocoTestReport)
 }
 

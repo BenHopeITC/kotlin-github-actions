@@ -5,11 +5,16 @@
 # This is needed as all files with changes might not be staged.
 stagedFiles=$(git diff --staged --name-only)
 
-# Part 2 - Apply the formatting:
+# Part 2 - Run fast tests and apply the formatting:
 # This is the part where files might be altered during the formatting.
 # You could also run other plugin in addition to the formatting.
-echo "Running spotlessApply. Formatting code..."
+echo "Running spotlessApply..."
 ./gradlew spotlessApply
+status=$? # store status from spotlessApply
+
+# Part 3 - Run slow tests:
+echo "Running tests (excluding slow)..."
+./gradlew test -DexcludeSlowTests=true
 status=$? # store status from spotlessApply
 
 # Part 3 - Re-add staged files:

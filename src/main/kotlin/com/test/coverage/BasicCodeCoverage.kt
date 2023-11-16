@@ -4,7 +4,7 @@ class BasicCodeCoverage() {
     fun helloWorld() = "Hello ${world()}!"
 
     fun helloWorld2(): String {
-        return "Hello 2 ${world()}!"
+        return "Hello ${world()}!"
     }
 
     fun greet(s: String) = "Hello $s"

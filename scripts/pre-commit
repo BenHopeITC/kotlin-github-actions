@@ -15,6 +15,7 @@ status=$? # store status from spotlessApply
 # Part 3 - Run slow tests:
 echo "Running tests (excluding slow)..."
 ./gradlew test -DexcludeSlowTests=true
+status=$? # store status from test
 
 # Part 3 - Re-add staged files:
 # All files that were identified in Part 1 are staged with git add.

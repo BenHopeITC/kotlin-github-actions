@@ -7,9 +7,15 @@ import org.junit.jupiter.api.Test
 class BasicCodeCoverageTest {
     @Tag("slow")
     @Test
-    fun `greet calls world but no coverage for HelloWorld()`() {
+    fun `SLOW greet calls world but no coverage for HelloWorld()`() {
         val m = BasicCodeCoverage()
         m.greet(m.world()) shouldBe "Hello World 2"
+    }
+
+    @Test
+    fun `FAST greet calls world but no coverage for HelloWorld()`() {
+        val m = BasicCodeCoverage()
+        m.greet(m.world()) shouldBe "Hello World"
     }
 
     @Test

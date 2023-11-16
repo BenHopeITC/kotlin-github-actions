@@ -15,7 +15,7 @@ class BasicCodeCoverageTest {
     @Test
     fun `FAST greet calls world but no coverage for HelloWorld()`() {
         val m = BasicCodeCoverage()
-        m.greet(m.world()) shouldBe "Hello World"
+        m.greet(m.world()) shouldBe "Hello World 33"
     }
 
     @Test

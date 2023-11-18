@@ -1,0 +1,30 @@
+name: API Gateway Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          aws-region: us-east-1
+
+#      - name: Deploy API Gateway
+#        run: aws apigateway create-deployment --rest-api-id <your-api-id> --stage-name <your-stage>
+
+      - name: Run API Tests
+        run: |
+          # Example using curl
+          curl -X GET https://${{ secrets.APIGW_URL }}/prod/
+
+#      - name: Clean Up
+#        run: aws apigateway delete-deployment --rest-api-id <your-api-id> --deployment-id <deployment-id>

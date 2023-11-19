@@ -30,10 +30,10 @@ jobs:
 #      - name: Deploy API Gateway
 #        run: aws apigateway create-deployment --rest-api-id <your-api-id> --stage-name <your-stage>
 
-      - name: Run API Tests (curl)
-        run: |
-          # Example using curl
-          curl -X GET https://${{ secrets.APIGW_URL }}/prod/
+#      - name: Run API Tests (curl)
+#        run: |
+#          # Example using curl
+#          curl -X GET https://${{ secrets.APIGW_URL }}/prod/
 
       - name: Run API Tests (cli)
         run: aws apigateway test-invoke-method --rest-api-id ${{ secrets.AWS_API_ID }} --resource-id ${{ secrets.AWS_RESOURCE_ID }} --http-method GET --path-with-query-string '/'

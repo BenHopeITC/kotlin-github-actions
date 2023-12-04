@@ -46,7 +46,7 @@ jobs:
       - name: Run Newman
         uses: docker://postman/newman:latest
         with:
-          args: run GitHubTree.json --reporters cli,junit --reporter-junit-export results.xml
+          args: run APIGW_Public.postman_collection.json --reporters cli,junit --reporter-junit-export results.xml
 
       - name: Report
         uses: dorny/test-reporter@v1

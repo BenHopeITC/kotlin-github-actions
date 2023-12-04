@@ -42,6 +42,43 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "HelloMessageFail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://f64kr5z5ni.execute-api.us-east-1.amazonaws.com/prod/",
+					"protocol": "https",
+					"host": [
+						"f64kr5z5ni",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
